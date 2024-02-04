@@ -2,8 +2,8 @@
     <main class="main">
         <MyHeader></MyHeader>
         <section class="products" aria-label="страница с товарами">
-            <MyForm :model="model"></MyForm>
-            <CardsList></CardsList>
+            <MyForm :model="productCards" @create="createCard"></MyForm>
+            <CardsList :productCards="productCards"></CardsList>
             
         </section>
        
@@ -15,7 +15,11 @@ import MyHeader from '@/components/MyHeader.vue'
 import MyForm from '@/components/MyForm.vue'
 import CardsList from '@/components/CardsList.vue'
 
-const model = {}
+const productCards = []
+
+const createCard = (card) => {
+    productCards.push(card)
+}
 
 </script>
 
@@ -37,6 +41,7 @@ const model = {}
 .products {
     display: flex;
     gap: 16px;
+    align-items: flex-start;
 }
 
 @media screen and (max-width: 725px) {

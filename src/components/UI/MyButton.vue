@@ -1,5 +1,5 @@
 <template>
-    <button :type="attrs.type" class="product-order-form__sbm-button">{{ attrs.buttonText }}</button>
+    <button :type="attrs.type" class="product-order-form__sbm-button" :disabled="attrs.disabled">{{ attrs.buttonText }}</button>
 </template>
 
 <script>

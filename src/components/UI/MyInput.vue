@@ -1,9 +1,9 @@
 <template >
     <li class="product-order-form__input-wrapper">
-        <label class="product-order-form__form__input-label" :for="attrs.for">Наименование товара<div
+        <label class="product-order-form__form__input-label" :for="attrs.for"><slot></slot><div
                 class="product-order-form__label-req"></div></label>
         <input :type="attrs.type" class="product-order-form__input" :id="attrs.for" :placeholder="attrs.placeholder"
-            required :value="props.modelValue" @input="updateInput">
+             :value="props.modelValue" @input="updateInput">
     </li>
 </template>
 
@@ -17,11 +17,9 @@ export default {
 import { useAttrs, defineProps, defineEmits  } from 'vue'
 const attrs = useAttrs();
 const props = defineProps({
-
     modelValue: {   
         default: null
-    }
-
+    },
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -82,4 +80,5 @@ function updateInput(event) {
         outline: 1px solid rgb(227, 221, 194);
     }
 }
+
 </style>

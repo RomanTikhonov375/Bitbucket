@@ -1,11 +1,17 @@
 <template>
     <ul class="products-list">
-        <ProductCard></ProductCard>
+        <ProductCard v-for="card in props.productCards" :card="card" :key="card.id"></ProductCard>
     </ul>
 </template>
 
 <script setup>
 import ProductCard from '@/components/ProductCard.vue'
+import { defineProps } from 'vue'
+const props = defineProps({
+    productCards: {
+        type: Array,
+    }
+})
 
 </script>
 
