@@ -1,7 +1,8 @@
 <template>
     <ul class="products-list">
         <transition-group name="list">
-            <ProductCard v-for="card in props.productCards" :card="card" :key="card.id" @remove="emit('remove', card)"></ProductCard>
+            <ProductCard class="list-item" v-for="card in props.productCards" :card="card" :key="card.id"
+                @remove="emit('remove', card)"></ProductCard>
         </transition-group>
     </ul>
 </template>
@@ -33,6 +34,7 @@ const emit = defineEmits('remove')
 }
 
 .list-item {
+    transition: all 0.8s ease;
     display: inline-block;
     margin-right: 10px;
 }
