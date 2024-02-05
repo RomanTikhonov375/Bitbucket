@@ -46,7 +46,8 @@ const options = ref([
 
 const createCard = (card) => {
     isProductAdd.value = true
-    productCards.value.push(card)
+    console.log(productCards.value)
+    productCards?.value.push(card)
     setTimeout(() => {
         isProductAdd.value = false
     }, 1000)
