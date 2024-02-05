@@ -1,16 +1,24 @@
 <template>
     <div class="section__header-wrapper">
         <h1 class="section__header-title">Добавление товара</h1>
-        <select class="select" aria-placeholder="Сортировка списка">
-            <option  class="select__option">По умолчанию</option>
-            <option  class="select__option">По возростанию цену</option>
-            <option  class="select__option">По убыванию цены</option>
-            <option  class="select__option">По наименовани</option>
-        </select>
+        <MySelect  :options="props.options" v-model="parrentSelectedOption"></MySelect>
+
     </div>
 </template>
 
-<script>
+<script setup>
+import MySelect from './UI/MySelect.vue';
+import {  defineProps, inject } from 'vue';
+const props = defineProps({
+
+    options : {
+        type: Array
+    }, 
+    }
+)
+
+const parrentSelectedOption = inject('parrentSelectedOption');
+
 
 </script>
 

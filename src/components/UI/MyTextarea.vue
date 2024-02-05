@@ -16,19 +16,23 @@ export default {
 <script setup>
 
 
-import { useAttrs, defineProps, defineEmits  } from 'vue'
+import { useAttrs, defineProps, defineEmits } from 'vue'
 const attrs = useAttrs();
 const props = defineProps({
-    modelValue: {   
+    modelValue: {
         default: null
     },
+    v: {
+        type: Object
+    }
 })
 
 const emit = defineEmits(['update:modelValue'])
 
 function updateInput(event) {
     emit('update:modelValue', event.target.value)
-            }
+    props.v.$validate()
+}
 </script>
 
 <style lang="scss" scoped>

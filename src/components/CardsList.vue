@@ -1,33 +1,54 @@
 <template>
     <ul class="products-list">
-        <ProductCard v-for="card in props.productCards" :card="card" :key="card.id"></ProductCard>
+        <transition-group name="list">
+            <ProductCard v-for="card in props.productCards" :card="card" :key="card.id" @remove="emit('remove', card)"></ProductCard>
+        </transition-group>
     </ul>
 </template>
 
 <script setup>
 import ProductCard from '@/components/ProductCard.vue'
-import { defineProps } from 'vue'
+import { defineProps, defineEmits } from 'vue'
 const props = defineProps({
     productCards: {
         type: Array,
+
     }
 })
+
+const emit = defineEmits('remove')
 
 </script>
 
 <style lang="scss" scoped>
-    .products-list {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        display: flex;
-        gap: 16px;
-        flex-wrap: wrap;
-        justify-content: center;
-        box-sizing: border-box;
-    }
+.products-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    box-sizing: border-box;
+}
 
-    @media screen and (max-width: 375px) {
+.list-item {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.list-enter-active,
+.list-leave-active {
+    transition: all 1s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+@media screen and (max-width: 410px) {
     .products-list {
         width: 100%;
         flex-direction: column;

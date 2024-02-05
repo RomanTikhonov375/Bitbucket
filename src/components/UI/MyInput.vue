@@ -20,12 +20,16 @@ const props = defineProps({
     modelValue: {   
         default: null
     },
+    v: {
+        type: Object
+    }
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:model-value'])
 
 function updateInput(event) {
-    emit('update:modelValue', event.target.value)
+    emit('update:model-value', event.target.value)
+    props.v.$validate()
             }
 
 </script>

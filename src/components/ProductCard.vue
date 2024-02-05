@@ -4,18 +4,21 @@
         <img class="product-card__image" :src="props.card.imgUrl">
         <h2 class="product-card__title">{{ props.card.title }}</h2>
         <p class="product-card__description">{{ props.card.description }}</p>
-        <p class="product-card__price">{{ props.card.price }} руб.</p>
+        <p class="product-card__price">{{ props.card.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") }} руб.</p>
+        <button class="product-card__trash" @click="emit('remove' , props.card)">Удалить</button>
     </li>
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps, defineEmits } from 'vue'
 
 const props = defineProps({
     card: {
         type: Object
     }
 })
+
+const emit = defineEmits('remove')
 
 </script>
 
@@ -31,13 +34,8 @@ const props = defineProps({
     border-radius: 4px;
     background: v.$white08;
     cursor: pointer;
-    overflow: hidden;
     transition: box-shadow 0.3s ease-out;
     box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.02), 0px 20px 30px 0px rgba(0, 0, 0, 0.04);
-
-    &:hover .product-card__image {
-        transform: scale(1.2);
-    }
 
     &:hover {
         box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.08), 0px 20px 30px 0px rgba(0, 0, 0, 0.04);
@@ -46,9 +44,10 @@ const props = defineProps({
 
 .product-card__image {
     object-fit: cover;
-    width: 100%;
+    width: 332px;
     transition: transform 0.3s ease-out;
-    overflow: hidden;
+    height: 200px;
+
 }
 
 .product-card__title {
@@ -70,5 +69,30 @@ const props = defineProps({
     padding-left: 16px;
     margin: 16px 0 24px 0;
 
+}
+
+.product-card__trash {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border: 0;
+    border-radius: 20px;
+    background-color: v.$pink;
+    background-image: url('../images/trash.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 0;
+    top:-12px;
+    right: -12px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 410px) {
+    .product-card__image {
+        width: 100%;
+    }
+    .product-card {
+        width: 100%;
+    }
 }
 </style>
