@@ -46,7 +46,6 @@ const options = ref([
 
 const createCard = (card) => {
     isProductAdd.value = true
-    console.log(productCards.value)
     productCards?.value.push(card)
     setTimeout(() => {
         isProductAdd.value = false
@@ -76,7 +75,9 @@ watch(parrentSelectedOption, (newValue) => {
 });
 
 onMounted(() => {
-    productCards.value = JSON.parse(localStorage.getItem('cards'))
+    if (localStorage.getItem('cards')) {
+        productCards.value = JSON.parse(localStorage.getItem('cards'))
+    }
 })
 
 </script>
